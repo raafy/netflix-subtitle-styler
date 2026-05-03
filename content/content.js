@@ -84,14 +84,17 @@
     return `/* Netflix Subtitle Styler */
 .player-timedtext {
   position: absolute !important;
-  max-width: ${s.maxWidth}vw !important;
-  width: ${s.maxWidth}vw !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  transform: none !important;
   top: ${s.verticalPosition}% !important;
   bottom: unset !important;
   text-align: ${s.textAlign} !important;
   font-size: 2.2vw !important;
+  padding: 0 ${(100 - s.maxWidth) / 2}vw !important;
+  box-sizing: border-box !important;
 }
 .player-timedtext-text-container {
   background-color: ${bgColor} !important;
@@ -99,7 +102,7 @@
   border-radius: ${s.backgroundBorderRadius}px !important;
   display: inline-block !important;
   max-width: 100% !important;
-  margin: 2px auto !important;
+  margin: 2px 0 !important;
 }
 .player-timedtext-text-container span,
 .player-timedtext span {

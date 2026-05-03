@@ -358,7 +358,7 @@ function updatePreview(s) {
     textShadow:      shadow,
     WebkitTextStroke: stroke,
     paintOrder:      "stroke fill",
-    letterSpacing:   s.letterSpacing + "px",
+    letterSpacing:   s.letterSpacing * 0.05 + "em",
     lineHeight:      s.lineHeight,
     textTransform:   s.textTransform,
     backgroundColor: bg,

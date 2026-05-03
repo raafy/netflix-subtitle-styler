@@ -101,16 +101,15 @@ export function buildSubtitleCSS(s) {
   top: ${s.verticalPosition}% !important;
   bottom: unset !important;
   text-align: ${s.textAlign} !important;
-  font-size: 2.2vw !important;
-  padding: 0 ${(100 - s.maxWidth) / 2}vw !important;
+  padding: 0 ${(100 - s.maxWidth) / 2}% !important;
   box-sizing: border-box !important;
 }
 
 /* Per-line wrapper */
 .player-timedtext-text-container {
   background-color: ${bgColor} !important;
-  padding: ${hasBg ? s.backgroundPadding + "px" : "0"} !important;
-  border-radius: ${s.backgroundBorderRadius}px !important;
+  padding: ${hasBg ? s.backgroundPadding * 0.1 + "em" : "0"} !important;
+  border-radius: ${s.backgroundBorderRadius * 0.1}em !important;
   display: inline-block !important;
   max-width: 100% !important;
   margin: 2px 0 !important;
@@ -127,7 +126,7 @@ export function buildSubtitleCSS(s) {
   text-shadow: ${textShadow} !important;
   -webkit-text-stroke: ${webkitTextStroke} !important;
   paint-order: ${paintOrder} !important;
-  letter-spacing: ${s.letterSpacing}px !important;
+  letter-spacing: ${s.letterSpacing * 0.05}em !important;
   line-height: ${s.lineHeight} !important;
   text-transform: ${s.textTransform} !important;
   background: transparent !important;

@@ -8,10 +8,11 @@ on:
 
 jobs:
   lint:
-    name: Lint
+    name: 🔍 Lint & Code Quality
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -25,17 +26,93 @@ jobs:
       - name: Run ESLint
         run: npm run lint
 
+      - name: Check for console.log statements
+        run: |
+          # Allow console.log in development but flag for production review
+          CONSOLE_LOGS=$(grep -r "console\.log" content/ background/ src/ --include="*.js" || true)
+          if [ -n "$CONSOLE_LOGS" ]; then
+            echo "⚠️  Found console.log statements (review before release):"
+            echo "$CONSOLE_LOGS"
+          fi
+
   validate-manifest:
-    name: Validate manifest.json
+    name: 📋 Validate Manifest
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Check manifest is valid JSON
-        run: python3 -c "import json, sys; json.load(open('manifest.json')); print('manifest.json is valid')"
+      - name: Validate JSON syntax
+        run: python3 -c "import json, sys; json.load(open('manifest.json')); print('✓ manifest.json is valid JSON')"
 
-      - name: Check manifest version
+      - name: Check Manifest V3
         run: |
           MV=$(python3 -c "import json; print(json.load(open('manifest.json'))['manifest_version'])")
           echo "Manifest version: $MV"
-          [ "$MV" = "3" ] || (echo "Expected manifest_version 3" && exit 1)
+          [ "$MV" = "3" ] || (echo "✗ Expected manifest_version 3" && exit 1)
+          echo "✓ Manifest V3 confirmed"
+
+      - name: Check required fields
+        run: |
+          python3 << 'EOF'
+          import json
+          import sys
+
+          with open('manifest.json') as f:
+              m = json.load(f)
+
+          required = ['name', 'version', 'manifest_version', 'description']
+          missing = [f for f in required if f not in m]
+
+          if missing:
+              print(f"✗ Missing required fields: {missing}")
+              sys.exit(1)
+
+          print("✓ All required fields present")
+          print(f"  - Name: {m['name']}")
+          print(f"  - Version: {m['version']}")
+          print(f"  - Description: {m['description'][:50]}...")
+          EOF
+
+  check-structure:
+    name: 🏗️ Check Project Structure
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Verify required files exist
+        run: |
+          required_files=(
+            "manifest.json"
+            "background/service-worker.js"
+            "content/content.js"
+            "src/settings.js"
+            "src/presets.js"
+            "options/options.html"
+            "options/options.js"
+            "popup/popup.html"
+            "popup/popup.js"
+            "icons/icon16.png"
+            "icons/icon128.png"
+          )
+
+          for file in "${required_files[@]}"; do
+            if [ -f "$file" ]; then
+              echo "✓ $file"
+            else
+              echo "✗ Missing: $file"
+              exit 1
+            fi
+          done
+
+      - name: Check icon sizes
+        run: |
+          # Verify icons exist in all required sizes
+          for size in 16 32 48 128; do
+            if [ -f "icons/icon${size}.png" ]; then
+              echo "✓ icon${size}.png"
+            else
+              echo "⚠️ Missing: icon${size}.png (optional but recommended)"
+            fi
+          done

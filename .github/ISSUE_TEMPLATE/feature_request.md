@@ -1,23 +1,35 @@
 ---
-name: Feature request
+name: 💡 Feature Request
 about: Suggest a new feature or improvement
 title: "[Feature] "
 labels: enhancement
 assignees: ""
 ---
 
-## Is your feature request related to a problem?
+## Problem / Motivation
 
-<!-- A clear description of the problem. e.g. "I can't control X…" -->
+<!-- Is your feature request related to a problem? Please describe -->
+<!-- Example: "I find it frustrating when…" or "It would be great if…" -->
 
-## Describe the solution you'd like
+## Proposed Solution
 
-<!-- A clear description of what you want to happen. -->
+<!-- Describe the solution you'd like -->
+<!-- Be as specific as possible about how this would work -->
 
-## Describe alternatives you've considered
+## User Story
 
-<!-- Any alternative solutions or features you've considered. -->
+<!-- Optional: Frame this as a user story -->
+<!-- "As a [type of user], I want [goal] so that [reason]." -->
 
-## Additional context
+## Alternative Solutions
 
-<!-- Add any other context, mockups, or examples here. -->
+<!-- Describe any alternative solutions or features you've considered -->
+
+## Mockups / Examples
+
+<!-- If applicable, add mockups, screenshots, or examples from other apps -->
+
+## Additional Context
+
+<!-- Add any other context about the feature request here -->
+<!-- For example, would this require changes to the settings schema? -->

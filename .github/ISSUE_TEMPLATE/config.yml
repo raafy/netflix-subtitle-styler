@@ -1,0 +1,13 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Start a Discussion
+    url: https://github.com/raafy/netflix-subtitle-styler/discussions
+    about: Ask questions, share ideas, or show off your custom presets
+
+  - name: 📖 Read the Documentation
+    url: https://github.com/raafy/netflix-subtitle-styler/blob/main/README.md
+    about: Check the README for usage instructions and FAQs
+
+  - name: 🤝 Contributing Guidelines
+    url: https://github.com/raafy/netflix-subtitle-styler/blob/main/CONTRIBUTING.md
+    about: Learn how to contribute to this project

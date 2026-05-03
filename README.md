@@ -1,11 +1,27 @@
 # Netflix Subtitle Styler
 
-> Fully customize Netflix subtitles — font, size, color, outline, shadow, position, and more.  
-> Comes with built-in presets including a **Crunchyroll-style** anime fansub look.
+<div align="center">
 
+[![Chrome Web Store](https://img.shields.io/badge/Chrome_Web_Store-Coming_Soon-e50914?logo=googlechrome&logoColor=white)](https://github.com/raafy/netflix-subtitle-styler)
+[![Firefox Add-ons](https://img.shields.io/badge/Firefox_Add--ons-Coming_Soon-FF7139?logo=firefoxbrowser&logoColor=white)](https://github.com/raafy/netflix-subtitle-styler)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Manifest V3](https://img.shields.io/badge/Manifest-V3-brightgreen.svg)](https://developer.chrome.com/docs/extensions/mv3/intro/)
+[![CI](https://github.com/raafy/netflix-subtitle-styler/actions/workflows/ci.yml/badge.svg)](.github/workflows/ci.yml)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+
+**Fully customize Netflix subtitles — typography, colors, positioning, and more.**  
+Built with Manifest V3 for Chrome, Edge, and Firefox.
+
+[Features](#features) • [Installation](#installation) • [Screenshots](#screenshots) • [Tech Stack](#tech-stack) • [Contributing](#contributing)
+
+</div>
+
+---
+
+> 🎨 **5 Built-in Presets** — including a **Crunchyroll-style** anime fansub look  
+> ⚡ **Live Preview** — see changes instantly in the settings page  
+> 💾 **Export/Import** — backup and share your configurations  
+> 🔄 **Sync Enabled** — settings roam across your Chrome/Firefox profile
 
 ---
 
@@ -20,6 +36,7 @@
   - [Chrome Web Store / Firefox Add-ons](#chrome-web-store--firefox-add-ons)
 - [Usage](#usage)
 - [Settings Reference](#settings-reference)
+- [Tech Stack](#tech-stack)
 - [Architecture](#architecture)
 - [Development](#development)
 - [Contributing](#contributing)
@@ -57,8 +74,30 @@
 
 ## Screenshots
 
-> _Screenshots will be added once the extension is loaded in a browser._  
-> See the [Installation](#installation) section to try it live.
+<!--
+To add screenshots for your portfolio:
+1. Load the extension in Chrome/Edge/Firefox
+2. Open Netflix with any show that has subtitles
+3. Open the options page and capture the UI
+4. Apply different presets and capture the subtitle variations
+5. Save images to a `docs/screenshots/` folder and reference them below
+-->
+
+> 📸 **Screenshots coming soon!**  
+> For now, try it yourself — see [Installation](#installation) below.
+
+<!--
+### Options Page
+![Options Page - Typography Section](docs/screenshots/options-typography.png)
+
+### Preset Examples
+| Netflix Default | Crunchyroll | Accessibility |
+|-----------------|-------------|---------------|
+| ![Default](docs/screenshots/preset-default.png) | ![Crunchyroll](docs/screenshots/preset-crunchyroll.png) | ![Accessibility](docs/screenshots/preset-accessibility.png) |
+
+### Popup Quick Controls
+![Popup](docs/screenshots/popup.png)
+-->
 
 ---
 
@@ -168,6 +207,26 @@ Use the **Export** and **Import** buttons in the options sidebar to save your co
 
 ---
 
+## Tech Stack
+
+| Category | Technologies | Purpose |
+|----------|--------------|---------|
+| **Extension API** | Chrome Manifest V3, `chrome.storage.sync`, `chrome.tabs`, `chrome.runtime` | Cross-browser extension architecture |
+| **Frontend** | Vanilla JavaScript (ES6+), CSS3, HTML5 | Zero-dependency UI with live preview |
+| **DOM Manipulation** | `MutationObserver`, CSS-in-JS injection | Survives Netflix's SPA navigation |
+| **Styling** | CSS Custom Properties, `-webkit-text-stroke`, dynamic CSS injection | Real-time subtitle customization |
+| **Build Tools** | ESLint, Python (icon generation) | Code quality and asset generation |
+| **CI/CD** | GitHub Actions | Automated linting and manifest validation |
+
+### Key Technical Decisions
+
+- **No build step** — Plain HTML/CSS/JS loads directly, enabling instant development iteration
+- **Self-contained content script** — Avoids ES module import issues in content script contexts
+- **MutationObserver pattern** — Ensures styles persist through Netflix's aggressive DOM re-renders
+- **Sync storage** — User settings roam across devices via Chrome/Firefox profile sync
+
+---
+
 ## Architecture
 
 ```
@@ -259,4 +318,14 @@ Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for:
 
 ## License
 
-[MIT](LICENSE) © 2026 raafy
+[MIT](LICENSE) © 2026 [raafy](https://github.com/raafy)
+
+---
+
+<div align="center">
+
+**Made with ❤️ for better accessibility and anime fansubs**
+
+[⭐ Star this repo](https://github.com/raafy/netflix-subtitle-styler) if you found it useful!
+
+</div>

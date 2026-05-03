@@ -1,6 +1,17 @@
 # Contributing to Netflix Subtitle Styler
 
-Thank you for considering a contribution! This document explains how to get the project running locally and how to submit changes.
+Thank you for your interest in contributing! This guide will help you get started with the development environment and understand our workflow.
+
+> 💡 **New to open source?** No problem! Issues labeled [`good first issue`](https://github.com/raafy/netflix-subtitle-styler/labels/good%20first%20issue) are great places to start.
+
+---
+
+## Quick Links
+
+- 📖 [Project README](../README.md)
+- 🐛 [Issue Tracker](https://github.com/raafy/netflix-subtitle-styler/issues)
+- 📋 [Pull Request Template](PULL_REQUEST_TEMPLATE.md)
+- 🔒 [Security Policy](../SECURITY.md)
 
 ---
 
@@ -10,15 +21,21 @@ Thank you for considering a contribution! This document explains how to get the 
 - [Getting Started](#getting-started)
 - [Project Structure](#project-structure)
 - [Development Workflow](#development-workflow)
-- [Submitting a Pull Request](#submitting-a-pull-request)
-- [Adding a New Preset](#adding-a-new-preset)
+- [Submitting Changes](#submitting-changes)
+- [Adding a Preset](#adding-a-preset)
 - [Style Guide](#style-guide)
+- [Questions?](#questions)
 
 ---
 
 ## Code of Conduct
 
-Be respectful and constructive. Harassment of any kind will not be tolerated.
+This project adheres to a standard of professional, constructive interaction. Please:
+
+- Be respectful and inclusive in all communications
+- Welcome newcomers and help them learn
+- Focus on constructive feedback rather than criticism
+- Assume good intentions from others
 
 ---
 
@@ -110,52 +127,68 @@ npm run lint
 
 ---
 
-## Submitting a Pull Request
+## Submitting Changes
 
-1. Fork the repository and create a branch from `main`:
+### Workflow
+
+1. **Fork and branch**: Create a feature branch from `main`
    ```bash
-   git checkout -b feat/my-feature
+   git checkout -b feat/your-feature-name
    ```
-2. Make your changes following the [Style Guide](#style-guide).
-3. Test on both Chrome and Firefox if possible.
-4. Commit with a descriptive message using [Conventional Commits](https://www.conventionalcommits.org/):
+
+2. **Make changes**: Follow the [Style Guide](#style-guide) below
+
+3. **Test thoroughly**:
+   - Test in Chrome and Firefox if possible
+   - Verify the live preview in options page works
+   - Check that popup controls update immediately
+
+4. **Commit** using [Conventional Commits](https://www.conventionalcommits.org/):
    ```
-   feat: add stroke color opacity control
-   fix: subtitle position reset on SPA navigation
-   docs: update preset descriptions
+   feat: add outline color opacity control
+   fix: prevent style reset on Netflix SPA navigation  
+   docs: improve preset descriptions
+   refactor: extract color utility functions
+   test: add manifest validation tests
    ```
-5. Push and open a Pull Request against `main`.
-6. Fill in the PR template — describe what changed and why.
+
+5. **Push and create PR**: Fill out the [Pull Request Template](PULL_REQUEST_TEMPLATE.md) with:
+   - Clear description of what changed and why
+   - Screenshots if UI was modified
+   - Testing steps for reviewers
+
+### PR Checklist
+
+- [ ] Code follows the style guide (no `var`, proper JSDoc)
+- [ ] `content/content.js` remains self-contained (no ES module imports)
+- [ ] All presets updated if settings schema changed
+- [ ] CHANGELOG.md updated for user-visible changes
+- [ ] README.md updated if new features added
 
 ---
 
-## Adding a New Preset
+## Adding a Preset
 
-1. Open `src/presets.js` and add your entry to the `PRESETS` object:
+Want to add a new built-in preset? Here's the complete checklist:
+
+1. **Define in `src/presets.js`**:
    ```js
    my_preset: {
      label: "My Preset",
      description: "A short description shown in the UI.",
-     settings: {
-       // all SubtitleSettings fields required
-     },
+     settings: { /* all SubtitleSettings fields */ },
    },
    ```
 
-2. Mirror the same object (without the `label`/`description` wrapper) into:
-   - `options/options.js` → the `PRESETS` constant at the top
-   - `popup/popup.js` → the `PRESET_META` constant
+2. **Mirror to options page** (`options/options.js`):
+   - Copy the settings object to the `PRESETS` constant
+   - Add a preset card in `options/options.html`
 
-3. Add a preset card in `options/options.html`:
-   ```html
-   <button class="preset-card" data-preset="my_preset">
-     <div class="preset-card__badge" style="background:#your-color">XX</div>
-     <div class="preset-card__name">My Preset</div>
-     <div class="preset-card__desc">Short description</div>
-   </button>
-   ```
+3. **Mirror to popup** (`popup/popup.js`):
+   - Add to `PRESET_META` constant (label + description only)
+   - Add `<option>` in `popup/popup.html`
 
-4. Add a `<option>` to the `<select>` in `popup/popup.html`.
+> ⚠️ **Important**: Presets must be synchronized across all three locations until we implement a shared module system.
 
 ---
 
@@ -167,3 +200,14 @@ npm run lint
 - CSS custom properties (variables) for all colors and spacing — avoid magic numbers.
 - `!important` is allowed **only** in `content/content.js` (needed to override Netflix inline styles).
 - Keep `content.js` self-contained — no ES module imports (content scripts run in a special context).
+
+---
+
+## Questions?
+
+- 🐛 **Found a bug?** [Open an issue](https://github.com/raafy/netflix-subtitle-styler/issues/new?template=bug_report.md)
+- 💡 **Have an idea?** [Request a feature](https://github.com/raafy/netflix-subtitle-styler/issues/new?template=feature_request.md)
+- 🔒 **Security issue?** See [SECURITY.md](../SECURITY.md) for private reporting
+- 💬 **General question?** [Start a discussion](https://github.com/raafy/netflix-subtitle-styler/discussions)
+
+Thank you for contributing! 🎉

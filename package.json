@@ -13,11 +13,19 @@
   "keywords": [
     "chrome-extension",
     "firefox-addon",
+    "browser-extension",
+    "manifest-v3",
     "netflix",
     "subtitles",
+    "captions",
     "accessibility",
+    "a11y",
     "anime",
-    "crunchyroll"
+    "crunchyroll",
+    "typography",
+    "css-injection",
+    "content-script",
+    "web-accessibility"
   ],
   "author": "raafy",
   "license": "MIT",

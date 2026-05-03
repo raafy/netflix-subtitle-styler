@@ -1,44 +1,70 @@
 ---
-name: Bug report
-about: Something isn't working as expected
+name: 🐛 Bug Report
+about: Report something that isn't working correctly
 title: "[Bug] "
 labels: bug
 assignees: ""
 ---
 
-## Describe the bug
+## Bug Summary
 
-<!-- A clear description of what the bug is. -->
+<!-- One-sentence summary of the bug -->
 
-## Steps to reproduce
+## Steps to Reproduce
 
-1. Go to '...'
-2. Enable preset '...'
-3. See error
+<!-- Please be as specific as possible -->
 
-## Expected behavior
+1. Open Netflix and play any video with subtitles
+2. 
+3. 
 
-<!-- What you expected to happen. -->
+## Expected Behavior
 
-## Actual behavior
+<!-- What did you expect to happen? -->
 
-<!-- What actually happened. Include screenshots if helpful. -->
+## Actual Behavior
+
+<!-- What actually happened? Screenshots are very helpful! -->
 
 ## Environment
 
-- Browser: <!-- e.g. Chrome 124, Firefox 125 -->
-- Extension version: <!-- e.g. 1.0.0 -->
-- OS: <!-- e.g. Windows 11, macOS 14, Ubuntu 24.04 -->
-- Netflix subtitle language: <!-- e.g. English, Japanese -->
+<!-- Please complete the following information -->
 
-## Console errors
+| Item | Details |
+|------|---------|
+| **Browser** | <!-- Chrome/Edge/Firefox and version (e.g., Chrome 124) --> |
+| **Extension Version** | <!-- e.g., 1.0.0 --> |
+| **OS** | <!-- Windows/macOS/Linux and version --> |
+| **Netflix Subtitle Language** | <!-- e.g., English, Japanese --> |
 
-<!-- Open DevTools (F12) on the Netflix tab and paste any errors here. -->
+## Additional Information
+
+### Console Errors
+<!-- 
+To check for errors:
+1. Open Netflix
+2. Press F12 to open DevTools
+3. Go to the Console tab
+4. Look for red error messages, especially from content.js or service-worker.js
+5. Copy and paste them below
+-->
 
 ```
-(paste here)
+<!-- Paste console errors here -->
 ```
 
-## Additional context
+### Screenshots
+<!-- If applicable, add screenshots to help explain the problem -->
 
-<!-- Anything else that might help. -->
+### Have you tried?
+<!-- Check all that apply -->
+
+- [ ] Reloading the extension (`chrome://extensions` → refresh icon)
+- [ ] Reloading the Netflix tab
+- [ ] Disabling and re-enabling the extension
+- [ ] Testing with a different preset
+- [ ] Testing with a different browser (if available)
+
+## Context
+
+<!-- Anything else that might help us understand and fix this issue -->

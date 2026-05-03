@@ -32,18 +32,6 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
   }
 });
 
-// ─── Storage changes: push updates to all open Netflix tabs ──────────────────
-
-chrome.storage.onChanged.addListener(async (changes, area) => {
-  if (area !== "sync") return;
-  if (!changes.subtitleSettings) return;
-
-  const newSettings = changes.subtitleSettings.newValue;
-  if (!newSettings) return;
-
-  applySettingsToTab(newSettings);
-});
-
 // ─── Message router ───────────────────────────────────────────────────────────
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -57,6 +45,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     const resolvedSettings = settings ?? DEFAULT_SETTINGS;
     const resolvedPreset   = settings ? activePreset : "netflix_default";
     saveSettings(resolvedSettings, resolvedPreset).then(() => {
+      applySettingsToTab(resolvedSettings);
       sendResponse({ ok: true });
     });
     return true;

@@ -76,20 +76,22 @@
       s.outlineWidth > 0
         ? `${s.outlineWidth}px ${s.outlineColor}`
         : "0px transparent";
-    const bgColor =
-      s.backgroundColor === "transparent" || s.backgroundOpacity === 0
-        ? "transparent"
-        : hexToRgba(s.backgroundColor, s.backgroundOpacity);
-    const hasBg = bgColor !== "transparent";
+    const bgColor = s.backgroundOpacity === 0
+      ? "transparent"
+      : hexToRgba(s.backgroundColor, s.backgroundOpacity);
+    const hasBg = s.backgroundOpacity > 0;
 
     return `/* Netflix Subtitle Styler */
 .player-timedtext {
+  position: absolute !important;
   max-width: ${s.maxWidth}vw !important;
+  width: ${s.maxWidth}vw !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
   top: ${s.verticalPosition}% !important;
   bottom: unset !important;
   text-align: ${s.textAlign} !important;
+  font-size: 2.2vw !important;
 }
 .player-timedtext-text-container {
   background-color: ${bgColor} !important;

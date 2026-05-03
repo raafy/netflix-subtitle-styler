@@ -303,8 +303,8 @@ function populateUI(s) {
   updateShadowDetailVisibility();
 
   // Background
-  bgColorPick.value  = s.backgroundColor !== "transparent" ? s.backgroundColor : "#000000";
-  bgColorHex.value   = s.backgroundColor !== "transparent" ? s.backgroundColor : "#000000";
+  bgColorPick.value  = s.backgroundColor;
+  bgColorHex.value   = s.backgroundColor;
   bgOpacity.value    = s.backgroundOpacity;    bgOpacityVal.textContent = Math.round(s.backgroundOpacity * 100) + "%";
   bgPadding.value    = s.backgroundPadding;    bgPaddingVal.textContent = s.backgroundPadding + "px";
   bgRadius.value     = s.backgroundBorderRadius; bgRadiusVal.textContent = s.backgroundBorderRadius + "px";
@@ -456,8 +456,12 @@ function onChange() {
   fontFamily, fontSize, fontWeight, fontStyle, letterSpacing, lineHeight, textTransform,
   opacitySlider, textShadow, shadowBlur, shadowOffsetX, shadowOffsetY,
   outlineWidth, bgOpacity, bgPadding, bgRadius, textAlign, verticalPosition, maxWidth,
-  masterToggle,
 ].forEach((el) => el.addEventListener("input", onChange));
+
+masterToggle.addEventListener("change", () => {
+  updatePreview(readUI());
+  isDirty = true;
+});
 
 [fontWeight, fontStyle, textTransform, textShadow, textAlign].forEach((el) =>
   el.addEventListener("change", onChange)
@@ -503,8 +507,6 @@ btnReset.addEventListener("click", () => {
   populateUI(PRESETS.netflix_default.settings);
   saveSettings();
 });
-
-masterToggle.addEventListener("change", onChange);
 
 // ─── Export ───────────────────────────────────────────────────────────────────
 

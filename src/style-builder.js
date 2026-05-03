@@ -79,12 +79,11 @@ export function buildSubtitleCSS(s) {
   const textShadow = buildTextShadow(s);
   const { webkitTextStroke, paintOrder } = buildOutline(s);
 
-  const bgColor =
-    s.backgroundColor === "transparent" || s.backgroundOpacity === 0
-      ? "transparent"
-      : hexToRgba(s.backgroundColor, s.backgroundOpacity);
+  const bgColor = s.backgroundOpacity === 0
+    ? "transparent"
+    : hexToRgba(s.backgroundColor, s.backgroundOpacity);
 
-  const fontSizePct = `${s.fontSize}%`;
+  const hasBg = s.backgroundOpacity > 0;
 
   return `
 /* ============================================================
@@ -93,18 +92,21 @@ export function buildSubtitleCSS(s) {
 
 /* Outer container: position + max-width */
 .player-timedtext {
+  position: absolute !important;
   max-width: ${s.maxWidth}vw !important;
+  width: ${s.maxWidth}vw !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
   top: ${s.verticalPosition}% !important;
   bottom: unset !important;
   text-align: ${s.textAlign} !important;
+  font-size: 2.2vw !important;
 }
 
 /* Per-line wrapper */
 .player-timedtext-text-container {
   background-color: ${bgColor} !important;
-  padding: ${bgColor !== "transparent" ? s.backgroundPadding + "px" : "0"} !important;
+  padding: ${hasBg ? s.backgroundPadding + "px" : "0"} !important;
   border-radius: ${s.backgroundBorderRadius}px !important;
   display: inline-block !important;
   max-width: 100% !important;
@@ -115,7 +117,7 @@ export function buildSubtitleCSS(s) {
 .player-timedtext-text-container span,
 .player-timedtext span {
   font-family: ${s.fontFamily} !important;
-  font-size: ${fontSizePct} !important;
+  font-size: ${s.fontSize}% !important;
   font-weight: ${s.fontWeight} !important;
   font-style: ${s.fontStyle} !important;
   color: ${hexToRgba(s.color, s.opacity)} !important;

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Netflix Subtitle Styler</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="popup">
+
+      <!-- Header -->
+      <header class="header">
+        <div class="header__logo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="2" y="14" width="20" height="4" rx="2" fill="#e50914"/>
+            <rect x="2" y="19.5" width="14" height="2.5" rx="1.25" fill="#e50914" opacity="0.55"/>
+            <text x="12" y="11" text-anchor="middle" font-size="10" font-weight="bold"
+              fill="white" font-family="Arial, sans-serif">Aa</text>
+          </svg>
+          <span class="header__title">Subtitle Styler</span>
+        </div>
+
+        <label class="toggle" title="Enable / Disable subtitle styling">
+          <input type="checkbox" id="toggleEnabled" />
+          <span class="toggle__track">
+            <span class="toggle__thumb"></span>
+          </span>
+        </label>
+      </header>
+
+      <!-- Status bar -->
+      <div class="status-bar" id="statusBar">
+        <span id="statusText">Loading…</span>
+      </div>
+
+      <!-- Preset selector -->
+      <section class="section">
+        <label class="section__label" for="presetSelect">Preset</label>
+        <select class="select" id="presetSelect">
+          <option value="netflix_default">Netflix Default</option>
+          <option value="crunchyroll">Crunchyroll</option>
+          <option value="accessibility">Accessibility</option>
+          <option value="cinema">Cinema</option>
+          <option value="minimal">Minimal</option>
+          <option value="custom">Custom</option>
+        </select>
+        <p class="preset-description" id="presetDescription"></p>
+      </section>
+
+      <!-- Quick controls -->
+      <section class="section">
+        <label class="section__label">Quick Adjustments</label>
+
+        <div class="control-row">
+          <label class="control-label" for="quickFontSize">Size</label>
+          <input type="range" class="slider" id="quickFontSize"
+            min="50" max="200" step="5" />
+          <span class="control-value" id="quickFontSizeVal">100%</span>
+        </div>
+
+        <div class="control-row">
+          <label class="control-label" for="quickOpacity">Opacity</label>
+          <input type="range" class="slider" id="quickOpacity"
+            min="0" max="1" step="0.05" />
+          <span class="control-value" id="quickOpacityVal">100%</span>
+        </div>
+
+        <div class="control-row">
+          <label class="control-label" for="quickColor">Color</label>
+          <input type="color" class="color-swatch" id="quickColor" />
+        </div>
+
+        <div class="control-row">
+          <label class="control-label" for="quickPosition">Position</label>
+          <input type="range" class="slider" id="quickPosition"
+            min="50" max="98" step="1" />
+          <span class="control-value" id="quickPositionVal">90%</span>
+        </div>
+      </section>
+
+      <!-- Footer actions -->
+      <footer class="footer">
+        <button class="btn btn--secondary" id="btnReset">Reset</button>
+        <button class="btn btn--primary" id="btnOpenOptions">Full Settings ›</button>
+      </footer>
+
+    </div>
+    <script src="popup.js"></script>
+  </body>
+</html>

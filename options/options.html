@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Netflix Subtitle Styler — Settings</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <div class="page">
+
+      <!-- Sidebar -->
+      <nav class="sidebar">
+        <div class="sidebar__brand">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="2" y="14" width="20" height="4.5" rx="2.25" fill="#e50914"/>
+            <rect x="2" y="20" width="14" height="2.5" rx="1.25" fill="#e50914" opacity="0.5"/>
+            <text x="12" y="11.5" text-anchor="middle" font-size="11" font-weight="bold"
+              fill="white" font-family="Arial, sans-serif">Aa</text>
+          </svg>
+          <span>Subtitle Styler</span>
+        </div>
+
+        <ul class="sidebar__nav">
+          <li><a class="nav-link active" data-section="presets" href="#">Presets</a></li>
+          <li><a class="nav-link" data-section="typography" href="#">Typography</a></li>
+          <li><a class="nav-link" data-section="color" href="#">Color &amp; Opacity</a></li>
+          <li><a class="nav-link" data-section="shadow" href="#">Shadow &amp; Outline</a></li>
+          <li><a class="nav-link" data-section="background" href="#">Background</a></li>
+          <li><a class="nav-link" data-section="layout" href="#">Layout &amp; Position</a></li>
+          <li><a class="nav-link" data-section="advanced" href="#">Advanced</a></li>
+        </ul>
+
+        <div class="sidebar__footer">
+          <button class="btn btn--ghost" id="btnImport">Import</button>
+          <button class="btn btn--ghost" id="btnExport">Export</button>
+        </div>
+      </nav>
+
+      <!-- Main content -->
+      <main class="content">
+
+        <!-- Header -->
+        <div class="content__header">
+          <div>
+            <h1 class="content__title" id="sectionTitle">Presets</h1>
+            <p class="content__subtitle" id="sectionSubtitle">Choose a built-in preset or build your own.</p>
+          </div>
+          <div class="header-actions">
+            <label class="toggle-row">
+              <span>Styling enabled</span>
+              <label class="toggle">
+                <input type="checkbox" id="masterToggle" checked />
+                <span class="toggle__track"><span class="toggle__thumb"></span></span>
+              </label>
+            </label>
+            <button class="btn btn--danger" id="btnReset">Reset All</button>
+            <button class="btn btn--primary" id="btnSave">Save &amp; Apply</button>
+          </div>
+        </div>
+
+        <!-- Toast -->
+        <div class="toast" id="toast"></div>
+
+        <!-- Live preview bar -->
+        <div class="preview-bar" id="previewBar" aria-live="polite">
+          <span id="previewText" class="preview-text">The quick brown fox jumps over the lazy dog</span>
+        </div>
+
+        <!-- Sections -->
+
+        <!-- ── PRESETS ── -->
+        <section class="panel" id="section-presets">
+          <div class="preset-grid">
+            <button class="preset-card" data-preset="netflix_default">
+              <div class="preset-card__badge" style="background:#e50914">N</div>
+              <div class="preset-card__name">Netflix Default</div>
+              <div class="preset-card__desc">Original Netflix subtitle style</div>
+            </button>
+            <button class="preset-card" data-preset="crunchyroll">
+              <div class="preset-card__badge" style="background:#f47521">CR</div>
+              <div class="preset-card__name">Crunchyroll</div>
+              <div class="preset-card__desc">Bold white + black outline, anime style</div>
+            </button>
+            <button class="preset-card" data-preset="accessibility">
+              <div class="preset-card__badge" style="background:#388e3c">A11y</div>
+              <div class="preset-card__name">Accessibility</div>
+              <div class="preset-card__desc">Yellow on black, large and clear</div>
+            </button>
+            <button class="preset-card" data-preset="cinema">
+              <div class="preset-card__badge" style="background:#5c6bc0">&#127916;</div>
+              <div class="preset-card__name">Cinema</div>
+              <div class="preset-card__desc">Elegant italic serif with soft shadow</div>
+            </button>
+            <button class="preset-card" data-preset="minimal">
+              <div class="preset-card__badge" style="background:#424242">—</div>
+              <div class="preset-card__name">Minimal</div>
+              <div class="preset-card__desc">Small, unobtrusive, semi-transparent</div>
+            </button>
+          </div>
+          <p class="hint">Selecting a preset overwrites all current settings. You can still tweak individual values afterwards.</p>
+        </section>
+
+        <!-- ── TYPOGRAPHY ── -->
+        <section class="panel hidden" id="section-typography">
+          <div class="form-grid">
+
+            <div class="field field--full">
+              <label class="field__label" for="fontFamily">Font Family</label>
+              <input class="input" type="text" id="fontFamily"
+                placeholder="e.g. Arial, sans-serif" />
+              <p class="field__hint">Any font available on the user's system or a CSS font stack.</p>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="fontSize">Size <span class="value-badge" id="fontSizeVal">100%</span></label>
+              <input class="slider" type="range" id="fontSize" min="50" max="200" step="5" />
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="fontWeight">Weight</label>
+              <select class="select" id="fontWeight">
+                <option value="100">Thin (100)</option>
+                <option value="200">Extra Light (200)</option>
+                <option value="300">Light (300)</option>
+                <option value="normal">Regular (400)</option>
+                <option value="500">Medium (500)</option>
+                <option value="600">Semi-Bold (600)</option>
+                <option value="bold">Bold (700)</option>
+                <option value="800">Extra Bold (800)</option>
+                <option value="900">Black (900)</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="fontStyle">Style</label>
+              <select class="select" id="fontStyle">
+                <option value="normal">Normal</option>
+                <option value="italic">Italic</option>
+                <option value="oblique">Oblique</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="letterSpacing">Letter Spacing <span class="value-badge" id="letterSpacingVal">0px</span></label>
+              <input class="slider" type="range" id="letterSpacing" min="-3" max="10" step="0.5" />
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="lineHeight">Line Height <span class="value-badge" id="lineHeightVal">1.4</span></label>
+              <input class="slider" type="range" id="lineHeight" min="0.8" max="3" step="0.1" />
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="textTransform">Transform</label>
+              <select class="select" id="textTransform">
+                <option value="none">None</option>
+                <option value="uppercase">UPPERCASE</option>
+                <option value="lowercase">lowercase</option>
+                <option value="capitalize">Capitalize</option>
+              </select>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ── COLOR & OPACITY ── -->
+        <section class="panel hidden" id="section-color">
+          <div class="form-grid">
+
+            <div class="field">
+              <label class="field__label" for="color">Text Color</label>
+              <div class="color-row">
+                <input class="color-input" type="color" id="color" />
+                <input class="input input--hex" type="text" id="colorHex" maxlength="7" placeholder="#ffffff" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="opacity">Text Opacity <span class="value-badge" id="opacityVal">100%</span></label>
+              <input class="slider" type="range" id="opacity" min="0" max="1" step="0.01" />
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ── SHADOW & OUTLINE ── -->
+        <section class="panel hidden" id="section-shadow">
+          <div class="form-grid">
+
+            <div class="field">
+              <label class="field__label" for="textShadow">Shadow Mode</label>
+              <select class="select" id="textShadow">
+                <option value="none">None</option>
+                <option value="drop-shadow">Drop Shadow</option>
+                <option value="hard">Hard (4-direction)</option>
+              </select>
+            </div>
+
+            <div class="field shadow-detail">
+              <label class="field__label" for="shadowColor">Shadow Color</label>
+              <div class="color-row">
+                <input class="color-input" type="color" id="shadowColor" />
+                <input class="input input--hex" type="text" id="shadowColorHex" maxlength="7" placeholder="#000000" />
+              </div>
+            </div>
+
+            <div class="field shadow-detail">
+              <label class="field__label" for="shadowBlur">Shadow Blur <span class="value-badge" id="shadowBlurVal">3px</span></label>
+              <input class="slider" type="range" id="shadowBlur" min="0" max="20" step="1" />
+            </div>
+
+            <div class="field shadow-detail">
+              <label class="field__label" for="shadowOffsetX">Offset X <span class="value-badge" id="shadowOffsetXVal">0px</span></label>
+              <input class="slider" type="range" id="shadowOffsetX" min="-20" max="20" step="1" />
+            </div>
+
+            <div class="field shadow-detail">
+              <label class="field__label" for="shadowOffsetY">Offset Y <span class="value-badge" id="shadowOffsetYVal">2px</span></label>
+              <input class="slider" type="range" id="shadowOffsetY" min="-20" max="20" step="1" />
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="outlineWidth">Outline Width <span class="value-badge" id="outlineWidthVal">0px</span></label>
+              <input class="slider" type="range" id="outlineWidth" min="0" max="8" step="0.5" />
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="outlineColor">Outline Color</label>
+              <div class="color-row">
+                <input class="color-input" type="color" id="outlineColor" />
+                <input class="input input--hex" type="text" id="outlineColorHex" maxlength="7" placeholder="#000000" />
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ── BACKGROUND ── -->
+        <section class="panel hidden" id="section-background">
+          <div class="form-grid">
+
+            <div class="field">
+              <label class="field__label" for="backgroundColor">Background Color</label>
+              <div class="color-row">
+                <input class="color-input" type="color" id="backgroundColor" />
+                <input class="input input--hex" type="text" id="backgroundColorHex" maxlength="7" placeholder="#000000" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="backgroundOpacity">Background Opacity <span class="value-badge" id="backgroundOpacityVal">0%</span></label>
+              <input class="slider" type="range" id="backgroundOpacity" min="0" max="1" step="0.01" />
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="backgroundPadding">Padding <span class="value-badge" id="backgroundPaddingVal">4px</span></label>
+              <input class="slider" type="range" id="backgroundPadding" min="0" max="24" step="1" />
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="backgroundBorderRadius">Border Radius <span class="value-badge" id="backgroundBorderRadiusVal">2px</span></label>
+              <input class="slider" type="range" id="backgroundBorderRadius" min="0" max="20" step="1" />
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ── LAYOUT & POSITION ── -->
+        <section class="panel hidden" id="section-layout">
+          <div class="form-grid">
+
+            <div class="field">
+              <label class="field__label" for="textAlign">Text Alignment</label>
+              <select class="select" id="textAlign">
+                <option value="left">Left</option>
+                <option value="center">Center</option>
+                <option value="right">Right</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="verticalPosition">Vertical Position <span class="value-badge" id="verticalPositionVal">90%</span></label>
+              <input class="slider" type="range" id="verticalPosition" min="50" max="98" step="1" />
+              <p class="field__hint">Percentage from the top of the viewport (higher = lower on screen).</p>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="maxWidth">Max Width <span class="value-badge" id="maxWidthVal">80%</span></label>
+              <input class="slider" type="range" id="maxWidth" min="20" max="100" step="5" />
+              <p class="field__hint">Maximum subtitle container width as a percentage of the viewport width.</p>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ── ADVANCED ── -->
+        <section class="panel hidden" id="section-advanced">
+          <div class="form-grid">
+
+            <div class="field field--full">
+              <label class="field__label">Export / Import Settings</label>
+              <p class="field__hint">Use the buttons in the sidebar to back up or restore your configuration as a JSON file.</p>
+            </div>
+
+            <div class="field field--full">
+              <label class="field__label">About</label>
+              <p class="field__hint">
+                Netflix Subtitle Styler v1.0.0 &bull;
+                <a class="link" href="https://github.com/raafy/netflix-subtitle-styler" target="_blank" rel="noopener">GitHub</a>
+                &bull; MIT License
+              </p>
+            </div>
+
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+    <!-- Hidden file input for import -->
+    <input type="file" id="importFile" accept=".json" style="display:none" />
+
+    <script src="options.js"></script>
+  </body>
+</html>

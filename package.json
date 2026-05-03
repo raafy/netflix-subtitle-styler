@@ -1,0 +1,39 @@
+{
+  "name": "netflix-subtitle-styler",
+  "version": "1.0.0",
+  "description": "A Chrome/Firefox extension to fully customize Netflix subtitles with presets and granular controls.",
+  "private": true,
+  "scripts": {
+    "icons": "python3 scripts/generate-icons.py",
+    "icons:canvas": "node scripts/generate-icons.js",
+    "zip:chrome": "zip -r dist/netflix-subtitle-styler-chrome.zip manifest.json background content icons options popup src -x '*.DS_Store'",
+    "zip:firefox": "zip -r dist/netflix-subtitle-styler-firefox.zip manifest.json background content icons options popup src -x '*.DS_Store'",
+    "lint": "eslint '**/*.js' --ignore-path .eslintignore"
+  },
+  "keywords": [
+    "chrome-extension",
+    "firefox-addon",
+    "netflix",
+    "subtitles",
+    "accessibility",
+    "anime",
+    "crunchyroll"
+  ],
+  "author": "raafy",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/raafy/netflix-subtitle-styler.git"
+  },
+  "bugs": {
+    "url": "https://github.com/raafy/netflix-subtitle-styler/issues"
+  },
+  "homepage": "https://github.com/raafy/netflix-subtitle-styler#readme",
+  "devDependencies": {
+    "canvas": "^2.11.2",
+    "eslint": "^8.57.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

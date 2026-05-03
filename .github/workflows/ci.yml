@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+  validate-manifest:
+    name: Validate manifest.json
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check manifest is valid JSON
+        run: python3 -c "import json, sys; json.load(open('manifest.json')); print('manifest.json is valid')"
+
+      - name: Check manifest version
+        run: |
+          MV=$(python3 -c "import json; print(json.load(open('manifest.json'))['manifest_version'])")
+          echo "Manifest version: $MV"
+          [ "$MV" = "3" ] || (echo "Expected manifest_version 3" && exit 1)
